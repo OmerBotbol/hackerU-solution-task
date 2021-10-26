@@ -51,6 +51,7 @@ function ListPage() {
           })}
         </tbody>
       </table>
+      <Link to="/build">Create New Form</Link>
     </div>
   );
 }
