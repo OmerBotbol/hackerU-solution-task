@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Forms;
+use App\Models\Questions;
 
 class QuestionController extends Controller
 {
@@ -24,7 +26,20 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //save all questions
+        $form = new Forms;
+        $form->formName = $request["formName"];
+        $form->submissions = 0;
+        $form->save();
+        $formId = $form->id;
+        foreach ($request["questions"] as $question) {
+            $questionToSave = new Questions;
+            $questionToSave->formId = $formId;
+            $questionToSave->label = $question["label"];
+            $questionToSave->type = $question["type"];
+            $questionToSave->save();
+        };
+        return $form;
     }
 
     /**

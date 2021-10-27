@@ -1,25 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Redirect } from 'react-router';
-
-const fakeFormId = 4;
+import axios from 'axios';
 
 function BuilderPage() {
   const [questions, setQuestions] = useState([]);
   const [label, setLabel] = useState('');
   const [type, setType] = useState('');
   const [formName, setFormName] = useState('');
-  const [formId, setFormId] = useState();
   const [isFinished, setIsFinished] = useState(false);
-
-  useEffect(() => {
-    /* http request to get new formId */
-    setFormId(fakeFormId);
-  }, []);
 
   const addToQuestions = () => {
     if (label && type) {
       const currentQuestions = [...questions];
-      currentQuestions.push({ formId, label, type });
+      currentQuestions.push({ label, type });
       setQuestions(currentQuestions);
       setLabel('');
       setType('');
@@ -29,9 +22,10 @@ function BuilderPage() {
   const handleSubmit = () => {
     /** http request to post the form */
     if (formName && questions.length > 0) {
-      const formData = { formName, questions, formId };
-      console.log(formData);
-      setIsFinished(true);
+      const formData = { formName, questions };
+      axios.post('http://127.0.0.1:8000/api/question', formData).then(() => {
+        setIsFinished(true);
+      });
     }
   };
 

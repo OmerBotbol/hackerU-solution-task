@@ -6,7 +6,7 @@ function ListPage() {
   const [formList, setFormList] = useState([]);
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:8000/api/forms').then((result) => {
+    axios.get('http://127.0.0.1:8000/api/form').then((result) => {
       setFormList(result.data);
     });
   }, []);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Forms;
 
 class FormController extends Controller
 {
@@ -13,7 +14,8 @@ class FormController extends Controller
      */
     public function index()
     {
-        //
+        //get all forms
+        return Forms::all();
     }
 
     /**
