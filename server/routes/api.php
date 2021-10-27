@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\AnswerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::resource('form', FormController::class);
 
+Route::get('question/from/{formId}', 'App\Http\Controllers\QuestionController@showByFormId');
 Route::resource('question', QuestionController::class);
+
+Route::resource('answer', AnswerController::class);

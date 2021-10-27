@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Answers;
 
 class AnswerController extends Controller
 {
@@ -24,7 +25,16 @@ class AnswerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //save all answers from form
+
+        // return $request;
+        foreach ($request["data"] as $answer) {
+            $answerToSave = new Answers;
+            $answerToSave->questionId = $answer["questionId"];
+            $answerToSave->answer = $answer["answer"];
+            $answerToSave->save();
+        };
+        return ["status"=>"submitted"];
     }
 
     /**

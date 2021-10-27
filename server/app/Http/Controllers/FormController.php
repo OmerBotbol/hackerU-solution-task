@@ -37,7 +37,8 @@ class FormController extends Controller
      */
     public function show($id)
     {
-        //
+        //get form by id
+        return Forms::find($id);
     }
 
     /**
@@ -49,7 +50,10 @@ class FormController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // update form
+        $form = Forms::find($id);
+        $form->update($request->all());
+        return $form; 
     }
 
     /**

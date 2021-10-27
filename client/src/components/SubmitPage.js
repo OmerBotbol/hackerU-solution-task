@@ -1,5 +1,6 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Redirect } from 'react-router';
+import { Redirect, useParams } from 'react-router';
 
 const fakeQuestions = [
   { id: 1, label: 'what is your name?', type: 'text' },
@@ -11,17 +12,20 @@ const fakeTitle = 'cool form';
 
 function SubmitPage() {
   const [questions, setQuestions] = useState([]);
-  const [formName, setFormName] = useState('');
+  const [formData, setFormData] = useState({});
   const [answers, setAnswers] = useState([]);
   const [isFinished, setIsFinished] = useState(false);
+  const formId = useParams();
 
   useEffect(() => {
-    /** http request to get questions and the form name by form id */
-    setTimeout(() => {
-      setQuestions(fakeQuestions);
-      setFormName(fakeTitle);
-    }, 1000);
-  }, []);
+    Promise.all([
+      axios.get(`http://127.0.0.1:8000/api/question/from/${formId.id}`),
+      axios.get(`http://127.0.0.1:8000/api/form/${formId.id}`),
+    ]).then((result) => {
+      setQuestions(result[0].data);
+      setFormData(result[1].data);
+    });
+  }, [formId]);
 
   const handleChange = (answer, questionId, i) => {
     const answerArr = [...answers];
@@ -32,13 +36,23 @@ function SubmitPage() {
   const handleSubmit = () => {
     if (answers.length === questions.length) {
       /** http request to post the answers to the server */
-      console.log(answers);
-      return setIsFinished(true);
+      const postData = {
+        data: answers,
+      };
+      axios.post('http://127.0.0.1:8000/api/answer', postData).then(() => {
+        axios
+          .put(`http://127.0.0.1:8000/api/form/${formId.id}`, {
+            submissions: formData.submissions + 1,
+          })
+          .then(() => {
+            setIsFinished(true);
+          });
+      });
     }
     console.log('missing answers');
   };
 
-  if (questions.length === 0 || !formName) {
+  if (questions.length === 0 || !formData.formName) {
     return <div>LOADING...</div>;
   }
 
@@ -48,7 +62,7 @@ function SubmitPage() {
 
   return (
     <div>
-      <h1>{formName}</h1>
+      <h1>{formData.formName}</h1>
       {questions.map((question, i) => {
         return (
           <div key={i}>

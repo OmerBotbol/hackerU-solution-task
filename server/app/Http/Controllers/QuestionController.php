@@ -42,6 +42,12 @@ class QuestionController extends Controller
         return $form;
     }
 
+    public function showByFormId($formId)
+    {
+        $questions = Questions::where("formId", $formId)->get();
+        return $questions;
+    }
+
     /**
      * Display the specified resource.
      *
