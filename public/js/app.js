@@ -2189,10 +2189,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _css_BuilderPage_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../css/BuilderPage.css */ "./resources/css/BuilderPage.css");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -2212,6 +2213,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -2245,128 +2247,159 @@ function BuilderPage() {
       isFinished = _useState10[0],
       setIsFinished = _useState10[1];
 
-  var addToQuestions = function addToQuestions() {
-    if (label && type) {
-      var currentQuestions = _toConsumableArray(questions);
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+      _useState12 = _slicedToArray(_useState11, 2),
+      error = _useState12[0],
+      setError = _useState12[1];
 
-      currentQuestions.push({
-        label: label,
-        type: type
-      });
-      setQuestions(currentQuestions);
-      setLabel("");
-      setType("");
+  var addToQuestions = function addToQuestions() {
+    if (!label || !type) {
+      return setError("please enter label AND type");
     }
+
+    setError("");
+
+    var currentQuestions = _toConsumableArray(questions);
+
+    currentQuestions.push({
+      label: label,
+      type: type
+    });
+    setQuestions(currentQuestions);
+    setLabel("");
+    setType("");
   };
 
   var handleSubmit = function handleSubmit() {
     /** http request to post the form */
-    if (formName && questions.length > 0) {
-      var formData = {
-        formName: formName,
-        questions: questions
-      };
-      axios__WEBPACK_IMPORTED_MODULE_1___default().post("/api/question", formData).then(function () {
-        setIsFinished(true);
-      });
+    if (!formName || questions.length === 0) {
+      return setError("you need to fill the form name AND questions");
     }
+
+    setError("");
+    var formData = {
+      formName: formName,
+      questions: questions
+    };
+    axios__WEBPACK_IMPORTED_MODULE_1___default().post("http://127.0.0.1:8000/api/question", formData).then(function () {
+      setIsFinished(true);
+    });
   };
 
   if (isFinished) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_router__WEBPACK_IMPORTED_MODULE_3__.Redirect, {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router__WEBPACK_IMPORTED_MODULE_4__.Redirect, {
       to: "/"
     });
   }
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    id: "builder-page-container",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
+      id: "builder-page-header",
       children: "Create New Form"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       id: "form-name-container",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+        className: "name-label",
         children: "Form Name: "
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+        className: "text-input",
         type: "text",
-        placeholder: "enter the form name here",
         onChange: function onChange(e) {
           return setFormName(e.target.value);
         }
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-      id: "question-data-container",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-        id: "label-container",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
-          children: "label: "
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-          type: "text",
-          value: label,
-          placeholder: "enter your label here",
-          onChange: function onChange(e) {
-            return setLabel(e.target.value);
-          }
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-        id: "type-container",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
-          children: "type: "
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("select", {
-          value: type,
-          onChange: function onChange(e) {
-            return setType(e.target.value);
-          },
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
-            value: "",
-            disabled: true,
-            children: "Select your option"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
-            value: "text",
-            children: "text"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
-            value: "date",
-            children: "date"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
-            value: "email",
-            children: "email"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
-            value: "tel",
-            children: "telephone"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
-            value: "number",
-            children: "number"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      id: "questions-container",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        id: "question-data-container",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "option-container",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+            className: "name-label",
+            children: "label: "
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+            type: "text",
+            value: label,
+            className: "text-input",
+            onChange: function onChange(e) {
+              return setLabel(e.target.value);
+            }
           })]
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-        onClick: function onClick() {
-          return addToQuestions();
-        },
-        children: "ADD"
-      })]
-    }), questions.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("table", {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tbody", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
-              children: "Label"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
-              children: "type"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "option-container",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+            className: "name-label",
+            children: "type: "
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("select", {
+            value: type,
+            onChange: function onChange(e) {
+              return setType(e.target.value);
+            },
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+              value: "",
+              disabled: true,
+              children: "Select type"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+              value: "text",
+              children: "text"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+              value: "date",
+              children: "date"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+              value: "email",
+              children: "email"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+              value: "tel",
+              children: "telephone"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+              value: "number",
+              children: "number"
             })]
-          }), questions.map(function (question, i) {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-                children: question.label
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-                children: question.type
-              })]
-            }, i);
           })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "custom-button",
+          onClick: function onClick() {
+            return addToQuestions();
+          },
+          children: "ADD"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          id: "error-log",
+          children: error
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("table", {
+          id: "question-table",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tbody", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
+                className: "table-header",
+                children: "Label"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
+                className: "table-header",
+                children: "type"
+              })]
+            }), questions === null || questions === void 0 ? void 0 : questions.map(function (question, i) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
+                className: "table-row",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
+                  className: "table-line",
+                  children: question.label
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
+                  className: "table-line",
+                  children: question.type
+                })]
+              }, i);
+            })]
+          })
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-        onClick: function onClick() {
-          return handleSubmit();
-        },
-        children: "SUBMIT"
       })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "custom-button submit-button",
+      onClick: function onClick() {
+        return handleSubmit();
+      },
+      children: "SUBMIT"
     })]
   });
 }
@@ -7097,6 +7130,30 @@ function SubmitPage() {
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/css/BuilderPage.css":
+/*!*************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/css/BuilderPage.css ***!
+  \*************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "#builder-page-container {\r\n  background-color: #ffccbc;\r\n  min-height: 100vh;\r\n}\r\n\r\n#builder-page-header {\r\n  color: white;\r\n  text-align: center;\r\n  font-size: 3em;\r\n  margin-top: 0;\r\n  padding-top: 15px;\r\n  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;\r\n}\r\n\r\n#form-name-container {\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: center;\r\n  width: 100vw;\r\n  padding-bottom: 30px;\r\n}\r\n\r\n.name-label {\r\n  margin-right: 20px;\r\n}\r\n\r\n.text-input {\r\n  border: black 1px solid;\r\n  padding: 3px;\r\n  border-radius: 20px;\r\n}\r\n\r\n#questions-container {\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: space-evenly;\r\n  width: 100vw;\r\n}\r\n\r\n#question-data-container {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  justify-content: space-evenly;\r\n  height: 30vh;\r\n  width: 20vw;\r\n  border: black 1px solid;\r\n  background-color: white;\r\n  padding: 20px;\r\n  box-shadow: 6px 6px 3px #aaaaaa;\r\n}\r\n\r\n.option-container {\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: space-between;\r\n  width: 100%;\r\n}\r\n\r\n#question-table {\r\n  border-collapse: collapse;\r\n  width: 40vw;\r\n}\r\n\r\n.table-row {\r\n  -webkit-animation: ShowIn 1s ease-out;\r\n          animation: ShowIn 1s ease-out;\r\n}\r\n\r\n@-webkit-keyframes ShowIn {\r\n  0% {\r\n    opacity: 0;\r\n  }\r\n  100% {\r\n    opacity: 1;\r\n  }\r\n}\r\n\r\n@keyframes ShowIn {\r\n  0% {\r\n    opacity: 0;\r\n  }\r\n  100% {\r\n    opacity: 1;\r\n  }\r\n}\r\n\r\n.submit-button {\r\n  position: absolute;\r\n  right: 20px;\r\n  bottom: 20px;\r\n}\r\n\r\n#error-log {\r\n  max-width: 20vw;\r\n  text-align: center;\r\n}\r\n\r\n@media only screen and (max-width: 768px) {\r\n  #questions-container {\r\n    flex-direction: column;\r\n    align-items: center;\r\n    min-height: 60vh;\r\n  }\r\n\r\n  #error-log {\r\n    max-width: 75vw;\r\n  }\r\n\r\n  #question-data-container {\r\n    width: 80vw;\r\n  }\r\n\r\n  #question-table {\r\n    border-collapse: collapse;\r\n    width: 80vw;\r\n  }\r\n\r\n  .table-line {\r\n    max-width: 50vw;\r\n    overflow: hidden;\r\n    white-space: nowrap;\r\n    text-overflow: ellipsis;\r\n  }\r\n}\r\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/css/ListPage.css":
 /*!**********************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/css/ListPage.css ***!
@@ -7114,7 +7171,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#list-page-container {\r\n    background-color: #ffccbc;\r\n    min-height: 100vh;\r\n}\r\n\r\n#list-page-header {\r\n    color: white;\r\n    text-align: center;\r\n    font-size: 3em;\r\n    margin-top: 0;\r\n    padding-top: 15px;\r\n    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;\r\n}\r\n\r\n#table-container {\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n    height: 50vh;\r\n    padding: 20px;\r\n}\r\n\r\n#list-table {\r\n    border-collapse: collapse;\r\n}\r\n\r\n.table-header {\r\n    background-color: #00887a;\r\n    color: white;\r\n    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;\r\n    border: black 0.5px solid;\r\n    padding: 10px;\r\n}\r\n\r\n.table-line {\r\n    background-color: white;\r\n    border: black 0.5px solid;\r\n    text-align: center;\r\n    padding: 10px;\r\n}\r\n\r\n.submit-link {\r\n    text-decoration: none;\r\n    color: #77a6f7;\r\n}\r\n\r\n.submit-link:hover {\r\n    font-weight: bold;\r\n}\r\n\r\n.custom-button {\r\n    background-color: white;\r\n    padding: 6px 12px;\r\n    border-radius: 20px;\r\n    border: #00887a solid 1px;\r\n    width: -webkit-max-content;\r\n    width: -moz-max-content;\r\n    width: max-content;\r\n    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);\r\n    color: #77a6f7;\r\n    text-decoration: none;\r\n}\r\n\r\n#build-button:hover {\r\n    color: black;\r\n    cursor: pointer;\r\n}\r\n\r\n@media only screen and (max-width: 768px) {\r\n    #table-container {\r\n        height: 60vh;\r\n    }\r\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "#list-page-container {\r\n    background-color: #ffccbc;\r\n    min-height: 100vh;\r\n}\r\n\r\n#list-page-header {\r\n    color: white;\r\n    text-align: center;\r\n    font-size: 3em;\r\n    margin-top: 0;\r\n    padding-top: 15px;\r\n    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;\r\n}\r\n\r\n#table-container {\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n    height: 50vh;\r\n    padding: 20px;\r\n}\r\n\r\n#list-table {\r\n    border-collapse: collapse;\r\n}\r\n\r\n.table-header {\r\n    background-color: #00887a;\r\n    color: white;\r\n    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;\r\n    border: black 0.5px solid;\r\n    padding: 10px;\r\n}\r\n\r\n.table-line {\r\n    background-color: white;\r\n    border: black 0.5px solid;\r\n    text-align: center;\r\n    padding: 10px;\r\n    max-width: 40vw;\r\n    overflow: hidden;\r\n    white-space: nowrap;\r\n    text-overflow: ellipsis;\r\n}\r\n\r\n.submit-link {\r\n    text-decoration: none;\r\n    color: #77a6f7;\r\n}\r\n\r\n.submit-link:hover {\r\n    font-weight: bold;\r\n}\r\n\r\n.custom-button {\r\n    background-color: white;\r\n    padding: 6px 12px;\r\n    border-radius: 20px;\r\n    border: #00887a solid 1px;\r\n    width: -webkit-max-content;\r\n    width: -moz-max-content;\r\n    width: max-content;\r\n    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);\r\n    color: #77a6f7;\r\n    text-decoration: none;\r\n}\r\n\r\n.custom-button:hover {\r\n    color: black;\r\n    cursor: pointer;\r\n}\r\n\r\n@media only screen and (max-width: 768px) {\r\n    #table-container {\r\n        height: 60vh;\r\n    }\r\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -74906,6 +74963,36 @@ if (false) {} else {
   module.exports = __webpack_require__(/*! ./cjs/scheduler-tracing.development.js */ "./node_modules/scheduler/cjs/scheduler-tracing.development.js");
 }
 
+
+/***/ }),
+
+/***/ "./resources/css/BuilderPage.css":
+/*!***************************************!*\
+  !*** ./resources/css/BuilderPage.css ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_BuilderPage_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./BuilderPage.css */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/css/BuilderPage.css");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_BuilderPage_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_BuilderPage_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 

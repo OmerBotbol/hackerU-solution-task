@@ -38,6 +38,10 @@
     border: black 0.5px solid;
     text-align: center;
     padding: 10px;
+    max-width: 40vw;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .submit-link {
@@ -60,7 +64,7 @@
     text-decoration: none;
 }
 
-#build-button:hover {
+.custom-button:hover {
     color: black;
     cursor: pointer;
 }
