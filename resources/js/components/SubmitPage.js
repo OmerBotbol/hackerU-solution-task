@@ -50,8 +50,9 @@ function SubmitPage() {
                             setIsFinished(true);
                         });
                 });
+        } else {
+            console.log("missing answers");
         }
-        console.log("missing answers");
     };
 
     if (questions.length === 0 || !formData.formName) {
