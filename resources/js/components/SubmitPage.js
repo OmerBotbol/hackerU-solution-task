@@ -9,13 +9,17 @@ function SubmitPage() {
     const [formData, setFormData] = useState({});
     const [answers, setAnswers] = useState([]);
     const [isFinished, setIsFinished] = useState(false);
+    const [error, setError] = useState("");
     const formId = useParams();
 
     useEffect(() => {
         Promise.all([
-            axios.get(`http://127.0.0.1:8000/api/question/from/${formId.id}`),
-            axios.get(`http://127.0.0.1:8000/api/form/${formId.id}`),
+            axios.get(`/api/question/from/${formId.id}`),
+            axios.get(`/api/form/${formId.id}`),
         ]).then((result) => {
+            if (result[0].data === 0 || !result[1].data) {
+                setError("Oops... Unable to find the form you asked");
+            }
             setQuestions(result[0].data);
             setFormData(result[1].data);
         });
@@ -28,27 +32,29 @@ function SubmitPage() {
     };
 
     const handleSubmit = () => {
-        if (answers.length === questions.length) {
-            /** http request to post the answers to the server */
-            const postData = {
-                data: answers,
-            };
-            axios
-                .post("http://127.0.0.1:8000/api/answer", postData)
-                .then(() => {
-                    axios
-                        .put(`http://127.0.0.1:8000/api/form/${formId.id}`, {
-                            submissions: formData.submissions + 1,
-                        })
-                        .then(() => {
-                            setIsFinished(true);
-                        });
-                });
+        if (answers.length !== questions.length) {
+            return setError("Please fill ALL fields");
         }
-        console.log("missing answers");
+        setError("");
+        const postData = {
+            data: answers,
+        };
+        axios.post("/api/answer", postData).then(() => {
+            axios
+                .put(`/api/form/${formId.id}`, {
+                    submissions: formData.submissions + 1,
+                })
+                .then(() => {
+                    setIsFinished(true);
+                });
+        });
     };
 
-    if (questions.length === 0 || !formData.formName) {
+    if (isFinished) {
+        return <Redirect to="/" />;
+    }
+
+    if ((questions.length === 0 || !formData.formName) && !error) {
         return (
             <div className="loader-container">
                 <Loader type="Oval" color="#77a6f7" height={100} width={100} />
@@ -56,8 +62,18 @@ function SubmitPage() {
         );
     }
 
-    if (isFinished) {
-        return <Redirect to="/" />;
+    if ((questions.length === 0 || !formData.formName) && error) {
+        return (
+            <div>
+                <div
+                    className="custom-button back-button"
+                    onClick={() => setIsFinished(true)}
+                >
+                    BACK
+                </div>
+                <div id="error-message">{error}</div>
+            </div>
+        );
     }
 
     return (
@@ -84,6 +100,7 @@ function SubmitPage() {
                         </div>
                     );
                 })}
+                <div className="error-log">{error}</div>
                 <div
                     className="custom-button submit-button"
                     onClick={() => handleSubmit()}

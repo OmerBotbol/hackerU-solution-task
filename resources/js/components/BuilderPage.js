@@ -30,7 +30,7 @@ function BuilderPage() {
         }
         setError("");
         const formData = { formName, questions };
-        axios.post("http://127.0.0.1:8000/api/question", formData).then(() => {
+        axios.post("/api/question", formData).then(() => {
             setIsFinished(true);
         });
     };

@@ -10,7 +10,7 @@ function ListPage() {
     const [isRedirect, setIsRedirect] = useState(false);
 
     useEffect(() => {
-        axios.get("http://127.0.0.1:8000/api/form").then((result) => {
+        axios.get("/api/form").then((result) => {
             setFormList(result.data);
         });
     }, []);

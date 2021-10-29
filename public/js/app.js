@@ -2281,7 +2281,7 @@ function BuilderPage() {
       formName: formName,
       questions: questions
     };
-    axios__WEBPACK_IMPORTED_MODULE_1___default().post("http://127.0.0.1:8000/api/question", formData).then(function () {
+    axios__WEBPACK_IMPORTED_MODULE_1___default().post("/api/question", formData).then(function () {
       setIsFinished(true);
     });
   };
@@ -2467,7 +2467,7 @@ function ListPage() {
       setIsRedirect = _useState4[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    axios__WEBPACK_IMPORTED_MODULE_2___default().get("http://127.0.0.1:8000/api/form").then(function (result) {
+    axios__WEBPACK_IMPORTED_MODULE_2___default().get("/api/form").then(function (result) {
       setFormList(result.data);
     });
   }, []);
@@ -2614,9 +2614,18 @@ function SubmitPage() {
       isFinished = _useState8[0],
       setIsFinished = _useState8[1];
 
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
+      _useState10 = _slicedToArray(_useState9, 2),
+      error = _useState10[0],
+      setError = _useState10[1];
+
   var formId = (0,react_router__WEBPACK_IMPORTED_MODULE_5__.useParams)();
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    Promise.all([axios__WEBPACK_IMPORTED_MODULE_0___default().get("http://127.0.0.1:8000/api/question/from/".concat(formId.id)), axios__WEBPACK_IMPORTED_MODULE_0___default().get("http://127.0.0.1:8000/api/form/".concat(formId.id))]).then(function (result) {
+    Promise.all([axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/question/from/".concat(formId.id)), axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/form/".concat(formId.id))]).then(function (result) {
+      if (result[0].data === 0 || !result[1].data) {
+        setError("Oops... Unable to find the form you asked");
+      }
+
       setQuestions(result[0].data);
       setFormData(result[1].data);
     });
@@ -2633,24 +2642,30 @@ function SubmitPage() {
   };
 
   var handleSubmit = function handleSubmit() {
-    if (answers.length === questions.length) {
-      /** http request to post the answers to the server */
-      var postData = {
-        data: answers
-      };
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post("http://127.0.0.1:8000/api/answer", postData).then(function () {
-        axios__WEBPACK_IMPORTED_MODULE_0___default().put("http://127.0.0.1:8000/api/form/".concat(formId.id), {
-          submissions: formData.submissions + 1
-        }).then(function () {
-          setIsFinished(true);
-        });
-      });
+    if (answers.length !== questions.length) {
+      return setError("Please fill ALL fields");
     }
 
-    console.log("missing answers");
+    setError("");
+    var postData = {
+      data: answers
+    };
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post("/api/answer", postData).then(function () {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().put("/api/form/".concat(formId.id), {
+        submissions: formData.submissions + 1
+      }).then(function () {
+        setIsFinished(true);
+      });
+    });
   };
 
-  if (questions.length === 0 || !formData.formName) {
+  if (isFinished) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router__WEBPACK_IMPORTED_MODULE_5__.Redirect, {
+      to: "/"
+    });
+  }
+
+  if ((questions.length === 0 || !formData.formName) && !error) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
       className: "loader-container",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_loader_spinner__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -2662,9 +2677,18 @@ function SubmitPage() {
     });
   }
 
-  if (isFinished) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router__WEBPACK_IMPORTED_MODULE_5__.Redirect, {
-      to: "/"
+  if ((questions.length === 0 || !formData.formName) && error) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        className: "custom-button back-button",
+        onClick: function onClick() {
+          return setIsFinished(true);
+        },
+        children: "BACK"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        id: "error-message",
+        children: error
+      })]
     });
   }
 
@@ -2694,6 +2718,9 @@ function SubmitPage() {
             }
           })]
         }, i);
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        className: "error-log",
+        children: error
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
         className: "custom-button submit-button",
         onClick: function onClick() {
@@ -7215,7 +7242,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".loader-container {\r\n  position: absolute;\r\n  left: 50%;\r\n  top: 50%;\r\n  transform: translate(-50%, -50%);\r\n}\r\n\r\n.form-container {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n}\r\n\r\n.form-section {\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: space-between;\r\n  align-items: center;\r\n  width: 50vw;\r\n  padding: 15px;\r\n}\r\n\r\n@media only screen and (max-width: 768px) {\r\n  .form-section {\r\n    width: 90vw;\r\n  }\r\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".loader-container {\r\n    position: absolute;\r\n    left: 50%;\r\n    top: 50%;\r\n    transform: translate(-50%, -50%);\r\n}\r\n\r\n#error-message {\r\n    position: absolute;\r\n    left: 50%;\r\n    top: 50%;\r\n    transform: translate(-50%, -50%);\r\n}\r\n\r\n.form-container {\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\r\n}\r\n\r\n.form-section {\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    width: 50vw;\r\n    padding: 15px;\r\n}\r\n\r\n@media only screen and (max-width: 768px) {\r\n    .form-section {\r\n        width: 90vw;\r\n    }\r\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
