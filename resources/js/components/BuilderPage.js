@@ -40,14 +40,14 @@ function BuilderPage() {
     }
 
     return (
-        <div id="builder-page-container">
+        <div className="page-container">
             <div
                 className="custom-button back-button"
                 onClick={() => setIsFinished(true)}
             >
                 BACK
             </div>
-            <h1 id="builder-page-header">Create New Form</h1>
+            <h1 className="page-header">Create New Form</h1>
             <div id="form-name-container">
                 <label className="name-label">Form Name: </label>
                 <input
@@ -91,7 +91,7 @@ function BuilderPage() {
                     </div>
                     <div id="error-log">{error}</div>
                 </div>
-                <div id="question-table-container">
+                <div className="table-container">
                     <table id="question-table">
                         <tbody>
                             <tr>

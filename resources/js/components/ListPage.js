@@ -10,7 +10,7 @@ function ListPage() {
     const [isRedirect, setIsRedirect] = useState(false);
 
     useEffect(() => {
-        axios.get("/api/form").then((result) => {
+        axios.get("http://127.0.0.1:8000/api/form").then((result) => {
             setFormList(result.data);
         });
     }, []);
@@ -31,39 +31,45 @@ function ListPage() {
                         width={100}
                     />
                 ) : (
-                    <table id="list-table">
-                        <tbody>
-                            <tr>
-                                <th className="table-header">ID</th>
-                                <th className="table-header">Form name</th>
-                                <th className="table-header">Submissions</th>
-                                <th className="table-header">Submit Page</th>
-                            </tr>
-                            {formList?.map((form, i) => {
-                                return (
-                                    <tr key={i}>
-                                        <td className="table-line">
-                                            {form.id}
-                                        </td>
-                                        <td className="table-line">
-                                            {form.formName}
-                                        </td>
-                                        <td className="table-line">
-                                            {form.submissions}
-                                        </td>
-                                        <td className="table-line">
-                                            <Link
-                                                className="submit-link"
-                                                to={`/${form.id}`}
-                                            >
-                                                view submit
-                                            </Link>
-                                        </td>
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    </table>
+                    <div className="table-container">
+                        <table id="list-table">
+                            <tbody>
+                                <tr>
+                                    <th className="table-header">ID</th>
+                                    <th className="table-header">Form name</th>
+                                    <th className="table-header">
+                                        Submissions
+                                    </th>
+                                    <th className="table-header">
+                                        Submit Page
+                                    </th>
+                                </tr>
+                                {formList?.map((form, i) => {
+                                    return (
+                                        <tr key={i}>
+                                            <td className="table-line">
+                                                {form.id}
+                                            </td>
+                                            <td className="table-line">
+                                                {form.formName}
+                                            </td>
+                                            <td className="table-line">
+                                                {form.submissions}
+                                            </td>
+                                            <td className="table-line">
+                                                <Link
+                                                    className="submit-link"
+                                                    to={`/${form.id}`}
+                                                >
+                                                    view submit
+                                                </Link>
+                                            </td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </table>
+                    </div>
                 )}
                 <div
                     className="custom-button"

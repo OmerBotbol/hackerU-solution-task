@@ -2293,7 +2293,7 @@ function BuilderPage() {
   }
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-    id: "builder-page-container",
+    className: "page-container",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
       className: "custom-button back-button",
       onClick: function onClick() {
@@ -2301,7 +2301,7 @@ function BuilderPage() {
       },
       children: "BACK"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
-      id: "builder-page-header",
+      className: "page-header",
       children: "Create New Form"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       id: "form-name-container",
@@ -2374,7 +2374,7 @@ function BuilderPage() {
           children: error
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-        id: "question-table-container",
+        className: "table-container",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("table", {
           id: "question-table",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tbody", {
@@ -2467,7 +2467,7 @@ function ListPage() {
       setIsRedirect = _useState4[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    axios__WEBPACK_IMPORTED_MODULE_2___default().get("/api/form").then(function (result) {
+    axios__WEBPACK_IMPORTED_MODULE_2___default().get("http://127.0.0.1:8000/api/form").then(function (result) {
       setFormList(result.data);
     });
   }, []);
@@ -2490,44 +2490,47 @@ function ListPage() {
         color: "#77a6f7",
         height: 100,
         width: 100
-      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("table", {
-        id: "list-table",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("tbody", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("th", {
-              className: "table-header",
-              children: "ID"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("th", {
-              className: "table-header",
-              children: "Form name"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("th", {
-              className: "table-header",
-              children: "Submissions"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("th", {
-              className: "table-header",
-              children: "Submit Page"
-            })]
-          }), formList === null || formList === void 0 ? void 0 : formList.map(function (form, i) {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("tr", {
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("td", {
-                className: "table-line",
-                children: form.id
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("td", {
-                className: "table-line",
-                children: form.formName
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("td", {
-                className: "table-line",
-                children: form.submissions
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("td", {
-                className: "table-line",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
-                  className: "submit-link",
-                  to: "/".concat(form.id),
-                  children: "view submit"
-                })
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        className: "table-container",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("table", {
+          id: "list-table",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("tbody", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("tr", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("th", {
+                className: "table-header",
+                children: "ID"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("th", {
+                className: "table-header",
+                children: "Form name"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("th", {
+                className: "table-header",
+                children: "Submissions"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("th", {
+                className: "table-header",
+                children: "Submit Page"
               })]
-            }, i);
-          })]
+            }), formList === null || formList === void 0 ? void 0 : formList.map(function (form, i) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("tr", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("td", {
+                  className: "table-line",
+                  children: form.id
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("td", {
+                  className: "table-line",
+                  children: form.formName
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("td", {
+                  className: "table-line",
+                  children: form.submissions
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("td", {
+                  className: "table-line",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
+                    className: "submit-link",
+                    to: "/".concat(form.id),
+                    children: "view submit"
+                  })
+                })]
+              }, i);
+            })]
+          })
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
         className: "custom-button",
@@ -2558,8 +2561,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_loader_spinner__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-loader-spinner */ "./node_modules/react-loader-spinner/dist/index.js");
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _css_SubmitPage_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../css/SubmitPage.css */ "./resources/css/SubmitPage.css");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -2585,20 +2590,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var fakeQuestions = [{
-  id: 1,
-  label: "what is your name?",
-  type: "text"
-}, {
-  id: 2,
-  label: "how old are you?",
-  type: "number"
-}, {
-  id: 3,
-  label: "what is your email?",
-  type: "email"
-}];
-var fakeTitle = "cool form";
+
+
 
 function SubmitPage() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
@@ -2621,9 +2614,9 @@ function SubmitPage() {
       isFinished = _useState8[0],
       setIsFinished = _useState8[1];
 
-  var formId = (0,react_router__WEBPACK_IMPORTED_MODULE_3__.useParams)();
+  var formId = (0,react_router__WEBPACK_IMPORTED_MODULE_5__.useParams)();
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    Promise.all([axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/question/from/".concat(formId.id)), axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/form/".concat(formId.id))]).then(function (result) {
+    Promise.all([axios__WEBPACK_IMPORTED_MODULE_0___default().get("http://127.0.0.1:8000/api/question/from/".concat(formId.id)), axios__WEBPACK_IMPORTED_MODULE_0___default().get("http://127.0.0.1:8000/api/form/".concat(formId.id))]).then(function (result) {
       setQuestions(result[0].data);
       setFormData(result[1].data);
     });
@@ -2652,42 +2645,62 @@ function SubmitPage() {
           setIsFinished(true);
         });
       });
-    } else {
-      console.log("missing answers");
     }
+
+    console.log("missing answers");
   };
 
   if (questions.length === 0 || !formData.formName) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-      children: "LOADING..."
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      className: "loader-container",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_loader_spinner__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        type: "Oval",
+        color: "#77a6f7",
+        height: 100,
+        width: 100
+      })
     });
   }
 
   if (isFinished) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_router__WEBPACK_IMPORTED_MODULE_3__.Redirect, {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router__WEBPACK_IMPORTED_MODULE_5__.Redirect, {
       to: "/"
     });
   }
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
-      children: formData.formName
-    }), questions.map(function (question, i) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
-          children: question.label
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-          type: question.type,
-          onChange: function onChange(e) {
-            return handleChange(e.target.value, question.id, i);
-          }
-        })]
-      }, i);
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    className: "page-container",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      className: "custom-button back-button",
       onClick: function onClick() {
-        return handleSubmit();
+        return setIsFinished(true);
       },
-      children: "SUBMIT"
+      children: "BACK"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
+      className: "page-header",
+      children: formData.formName
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      className: "form-container",
+      children: [questions.map(function (question, i) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          className: "form-section",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+            children: question.label
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+            className: "text-input",
+            type: question.type,
+            onChange: function onChange(e) {
+              return handleChange(e.target.value, question.id, i);
+            }
+          })]
+        }, i);
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        className: "custom-button submit-button",
+        onClick: function onClick() {
+          return handleSubmit();
+        },
+        children: "SUBMIT"
+      })]
     })]
   });
 }
@@ -7154,7 +7167,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#builder-page-container {\r\n    background-color: #ffccbc;\r\n    -webkit-animation: expand 0.8s ease forwards;\r\n            animation: expand 0.8s ease forwards;\r\n    min-height: 100vh;\r\n}\r\n\r\n@-webkit-keyframes expand {\r\n    0% {\r\n        transform: translateX(1400px);\r\n    }\r\n    100% {\r\n        transform: translateX(0px);\r\n    }\r\n}\r\n\r\n@keyframes expand {\r\n    0% {\r\n        transform: translateX(1400px);\r\n    }\r\n    100% {\r\n        transform: translateX(0px);\r\n    }\r\n}\r\n\r\n#builder-page-header {\r\n    color: white;\r\n    text-align: center;\r\n    font-size: 3em;\r\n    margin-top: 0;\r\n    padding-top: 15px;\r\n    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;\r\n}\r\n\r\n.back-button {\r\n    position: absolute;\r\n    top: 20px;\r\n    left: 20px;\r\n}\r\n\r\n#form-name-container {\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: center;\r\n    width: 100vw;\r\n    padding-bottom: 30px;\r\n}\r\n\r\n.name-label {\r\n    margin-right: 20px;\r\n}\r\n\r\n.text-input {\r\n    border: black 1px solid;\r\n    padding: 3px;\r\n    border-radius: 20px;\r\n}\r\n\r\n#questions-container {\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-evenly;\r\n    width: 100vw;\r\n}\r\n\r\n#question-data-container {\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\r\n    justify-content: space-evenly;\r\n    height: 30vh;\r\n    min-width: 20vw;\r\n    border: black 1px solid;\r\n    background-color: white;\r\n    padding: 20px;\r\n    box-shadow: 6px 6px 3px #aaaaaa;\r\n}\r\n\r\n.option-container {\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-between;\r\n    width: 100%;\r\n}\r\n\r\n#question-table {\r\n    border-collapse: collapse;\r\n    width: 40vw;\r\n}\r\n\r\n.table-row {\r\n    -webkit-animation: ShowIn 1s ease-out;\r\n            animation: ShowIn 1s ease-out;\r\n}\r\n\r\n@-webkit-keyframes ShowIn {\r\n    0% {\r\n        opacity: 0;\r\n    }\r\n    100% {\r\n        opacity: 1;\r\n    }\r\n}\r\n\r\n@keyframes ShowIn {\r\n    0% {\r\n        opacity: 0;\r\n    }\r\n    100% {\r\n        opacity: 1;\r\n    }\r\n}\r\n\r\n.submit-button {\r\n    position: absolute;\r\n    bottom: 20px;\r\n    right: 20px;\r\n}\r\n\r\n#error-log {\r\n    max-width: 20vw;\r\n    text-align: center;\r\n}\r\n\r\n@media only screen and (max-width: 768px) {\r\n    #questions-container {\r\n        flex-direction: column;\r\n        align-items: center;\r\n        min-height: 60vh;\r\n    }\r\n\r\n    #builder-page-header {\r\n        padding-top: 50px;\r\n    }\r\n\r\n    .submit-button {\r\n        position: relative;\r\n        bottom: 0px;\r\n        right: 0px;\r\n        margin-bottom: 30px;\r\n    }\r\n\r\n    #question-table-container {\r\n        padding: 30px;\r\n    }\r\n\r\n    #error-log {\r\n        max-width: 75vw;\r\n    }\r\n\r\n    #question-data-container {\r\n        width: 80vw;\r\n    }\r\n\r\n    #question-table {\r\n        border-collapse: collapse;\r\n        width: 80vw;\r\n    }\r\n\r\n    .table-line {\r\n        max-width: 50vw;\r\n        overflow: hidden;\r\n        white-space: nowrap;\r\n        text-overflow: ellipsis;\r\n    }\r\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".page-container {\r\n    background-color: #ffccbc;\r\n    -webkit-animation: expand 0.8s ease forwards;\r\n            animation: expand 0.8s ease forwards;\r\n    min-height: 100vh;\r\n}\r\n\r\n@-webkit-keyframes expand {\r\n    0% {\r\n        transform: translateX(1400px);\r\n    }\r\n    100% {\r\n        transform: translateX(0px);\r\n    }\r\n}\r\n\r\n@keyframes expand {\r\n    0% {\r\n        transform: translateX(1400px);\r\n    }\r\n    100% {\r\n        transform: translateX(0px);\r\n    }\r\n}\r\n\r\n.page-header {\r\n    color: white;\r\n    text-align: center;\r\n    font-size: 3em;\r\n    margin-top: 0;\r\n    padding-top: 15px;\r\n    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;\r\n}\r\n\r\n.back-button {\r\n    position: absolute;\r\n    top: 20px;\r\n    left: 20px;\r\n}\r\n\r\n#form-name-container {\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: center;\r\n    width: 100vw;\r\n    padding-bottom: 30px;\r\n}\r\n\r\n.name-label {\r\n    margin-right: 20px;\r\n}\r\n\r\n.text-input {\r\n    border: black 1px solid;\r\n    padding: 3px;\r\n    border-radius: 20px;\r\n    height: 2em;\r\n}\r\n\r\n#questions-container {\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-evenly;\r\n    width: 100vw;\r\n}\r\n\r\n#question-data-container {\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\r\n    justify-content: space-evenly;\r\n    height: 30vh;\r\n    min-width: 20vw;\r\n    border: black 1px solid;\r\n    background-color: white;\r\n    padding: 20px;\r\n    box-shadow: 6px 6px 3px #aaaaaa;\r\n}\r\n\r\n.option-container {\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-between;\r\n    width: 100%;\r\n}\r\n\r\n#question-table {\r\n    border-collapse: collapse;\r\n    width: 40vw;\r\n}\r\n\r\n.table-row {\r\n    -webkit-animation: ShowIn 1s ease-out;\r\n            animation: ShowIn 1s ease-out;\r\n}\r\n\r\n@-webkit-keyframes ShowIn {\r\n    0% {\r\n        opacity: 0;\r\n    }\r\n    100% {\r\n        opacity: 1;\r\n    }\r\n}\r\n\r\n@keyframes ShowIn {\r\n    0% {\r\n        opacity: 0;\r\n    }\r\n    100% {\r\n        opacity: 1;\r\n    }\r\n}\r\n\r\n.submit-button {\r\n    position: absolute;\r\n    bottom: 20px;\r\n    right: 20px;\r\n}\r\n\r\n#error-log {\r\n    max-width: 20vw;\r\n    text-align: center;\r\n}\r\n\r\n@media only screen and (max-width: 768px) {\r\n    #questions-container {\r\n        flex-direction: column;\r\n        align-items: center;\r\n        min-height: 60vh;\r\n    }\r\n\r\n    .page-header {\r\n        padding-top: 50px;\r\n    }\r\n\r\n    .submit-button {\r\n        position: static;\r\n        margin-bottom: 30px;\r\n    }\r\n\r\n    .table-container {\r\n        padding: 30px;\r\n    }\r\n\r\n    #error-log {\r\n        max-width: 75vw;\r\n    }\r\n\r\n    #question-data-container {\r\n        width: 80vw;\r\n    }\r\n\r\n    #question-table {\r\n        border-collapse: collapse;\r\n        width: 80vw;\r\n    }\r\n\r\n    .table-line {\r\n        max-width: 50vw;\r\n        overflow: hidden;\r\n        white-space: nowrap;\r\n        text-overflow: ellipsis;\r\n    }\r\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -7179,6 +7192,30 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "#list-page-container {\r\n    background-color: #ffccbc;\r\n    min-height: 100vh;\r\n    -webkit-animation: expandBack 0.8s ease forwards;\r\n            animation: expandBack 0.8s ease forwards;\r\n}\r\n\r\n@-webkit-keyframes expandBack {\r\n    0% {\r\n        transform: translateX(-1400px);\r\n    }\r\n    100% {\r\n        transform: translateX(0px);\r\n    }\r\n}\r\n\r\n@keyframes expandBack {\r\n    0% {\r\n        transform: translateX(-1400px);\r\n    }\r\n    100% {\r\n        transform: translateX(0px);\r\n    }\r\n}\r\n\r\n#list-page-header {\r\n    color: white;\r\n    text-align: center;\r\n    font-size: 3em;\r\n    margin-top: 0;\r\n    padding-top: 15px;\r\n    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;\r\n}\r\n\r\n#table-container {\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n    height: 50vh;\r\n    padding: 20px;\r\n}\r\n\r\n#list-table {\r\n    border-collapse: collapse;\r\n}\r\n\r\n.table-header {\r\n    background-color: #00887a;\r\n    color: white;\r\n    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;\r\n    border: black 0.5px solid;\r\n    padding: 10px;\r\n}\r\n\r\n.table-line {\r\n    background-color: white;\r\n    border: black 0.5px solid;\r\n    text-align: center;\r\n    padding: 10px;\r\n    max-width: 40vw;\r\n    overflow: hidden;\r\n    white-space: nowrap;\r\n    text-overflow: ellipsis;\r\n}\r\n\r\n.submit-link {\r\n    text-decoration: none;\r\n    color: #77a6f7;\r\n}\r\n\r\n.submit-link:hover {\r\n    font-weight: bold;\r\n}\r\n\r\n.custom-button {\r\n    background-color: white;\r\n    padding: 6px 12px;\r\n    border-radius: 20px;\r\n    border: #00887a solid 1px;\r\n    width: -webkit-max-content;\r\n    width: -moz-max-content;\r\n    width: max-content;\r\n    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);\r\n    color: #77a6f7;\r\n    text-decoration: none;\r\n}\r\n\r\n.custom-button:hover {\r\n    color: black;\r\n    cursor: pointer;\r\n}\r\n\r\n@media only screen and (max-width: 768px) {\r\n    #table-container {\r\n        height: 60vh;\r\n    }\r\n}\r\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/css/SubmitPage.css":
+/*!************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/css/SubmitPage.css ***!
+  \************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".loader-container {\r\n  position: absolute;\r\n  left: 50%;\r\n  top: 50%;\r\n  transform: translate(-50%, -50%);\r\n}\r\n\r\n.form-container {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n}\r\n\r\n.form-section {\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: space-between;\r\n  align-items: center;\r\n  width: 50vw;\r\n  padding: 15px;\r\n}\r\n\r\n@media only screen and (max-width: 768px) {\r\n  .form-section {\r\n    width: 90vw;\r\n  }\r\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -75030,6 +75067,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_ListPage_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
+/***/ "./resources/css/SubmitPage.css":
+/*!**************************************!*\
+  !*** ./resources/css/SubmitPage.css ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_SubmitPage_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./SubmitPage.css */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/css/SubmitPage.css");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_SubmitPage_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_SubmitPage_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 

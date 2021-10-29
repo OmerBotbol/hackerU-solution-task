@@ -1,14 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import Loader from "react-loader-spinner";
 import { Redirect, useParams } from "react-router";
-
-const fakeQuestions = [
-    { id: 1, label: "what is your name?", type: "text" },
-    { id: 2, label: "how old are you?", type: "number" },
-    { id: 3, label: "what is your email?", type: "email" },
-];
-
-const fakeTitle = "cool form";
+import "../../css/SubmitPage.css";
 
 function SubmitPage() {
     const [questions, setQuestions] = useState([]);
@@ -19,8 +13,8 @@ function SubmitPage() {
 
     useEffect(() => {
         Promise.all([
-            axios.get(`/api/question/from/${formId.id}`),
-            axios.get(`/api/form/${formId.id}`),
+            axios.get(`http://127.0.0.1:8000/api/question/from/${formId.id}`),
+            axios.get(`http://127.0.0.1:8000/api/form/${formId.id}`),
         ]).then((result) => {
             setQuestions(result[0].data);
             setFormData(result[1].data);
@@ -50,13 +44,16 @@ function SubmitPage() {
                             setIsFinished(true);
                         });
                 });
-        } else {
-            console.log("missing answers");
         }
+        console.log("missing answers");
     };
 
     if (questions.length === 0 || !formData.formName) {
-        return <div>LOADING...</div>;
+        return (
+            <div className="loader-container">
+                <Loader type="Oval" color="#77a6f7" height={100} width={100} />
+            </div>
+        );
     }
 
     if (isFinished) {
@@ -64,22 +61,36 @@ function SubmitPage() {
     }
 
     return (
-        <div>
-            <h1>{formData.formName}</h1>
-            {questions.map((question, i) => {
-                return (
-                    <div key={i}>
-                        <label>{question.label}</label>
-                        <input
-                            type={question.type}
-                            onChange={(e) =>
-                                handleChange(e.target.value, question.id, i)
-                            }
-                        />
-                    </div>
-                );
-            })}
-            <button onClick={() => handleSubmit()}>SUBMIT</button>
+        <div className="page-container">
+            <div
+                className="custom-button back-button"
+                onClick={() => setIsFinished(true)}
+            >
+                BACK
+            </div>
+            <h1 className="page-header">{formData.formName}</h1>
+            <div className="form-container">
+                {questions.map((question, i) => {
+                    return (
+                        <div key={i} className="form-section">
+                            <label>{question.label}</label>
+                            <input
+                                className="text-input"
+                                type={question.type}
+                                onChange={(e) =>
+                                    handleChange(e.target.value, question.id, i)
+                                }
+                            />
+                        </div>
+                    );
+                })}
+                <div
+                    className="custom-button submit-button"
+                    onClick={() => handleSubmit()}
+                >
+                    SUBMIT
+                </div>
+            </div>
         </div>
     );
 }

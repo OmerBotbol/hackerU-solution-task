@@ -1,4 +1,4 @@
-#builder-page-container {
+.page-container {
     background-color: #ffccbc;
     animation: expand 0.8s ease forwards;
     min-height: 100vh;
@@ -13,7 +13,7 @@
     }
 }
 
-#builder-page-header {
+.page-header {
     color: white;
     text-align: center;
     font-size: 3em;
@@ -44,6 +44,7 @@
     border: black 1px solid;
     padding: 3px;
     border-radius: 20px;
+    height: 2em;
 }
 
 #questions-container {
@@ -109,18 +110,16 @@
         min-height: 60vh;
     }
 
-    #builder-page-header {
+    .page-header {
         padding-top: 50px;
     }
 
     .submit-button {
-        position: relative;
-        bottom: 0px;
-        right: 0px;
+        position: static;
         margin-bottom: 30px;
     }
 
-    #question-table-container {
+    .table-container {
         padding: 30px;
     }
 
