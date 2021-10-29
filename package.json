@@ -1,6 +1,8 @@
 {
     "private": true,
     "scripts": {
+        "start": "php artisan serve",
+        "initial": "npm i && composer update && php artisan key:generate && php artisan migrate:fresh --seed && php artisan serve",
         "dev": "npm run development",
         "development": "mix",
         "watch": "mix watch",
