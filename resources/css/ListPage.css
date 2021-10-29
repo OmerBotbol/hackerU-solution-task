@@ -1,6 +1,16 @@
 #list-page-container {
     background-color: #ffccbc;
     min-height: 100vh;
+    animation: expandBack 0.8s ease forwards;
+}
+
+@keyframes expandBack {
+    0% {
+        transform: translateX(-1400px);
+    }
+    100% {
+        transform: translateX(0px);
+    }
 }
 
 #list-page-header {

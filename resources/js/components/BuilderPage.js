@@ -41,6 +41,12 @@ function BuilderPage() {
 
     return (
         <div id="builder-page-container">
+            <div
+                className="custom-button back-button"
+                onClick={() => setIsFinished(true)}
+            >
+                BACK
+            </div>
             <h1 id="builder-page-header">Create New Form</h1>
             <div id="form-name-container">
                 <label className="name-label">Form Name: </label>
@@ -85,7 +91,7 @@ function BuilderPage() {
                     </div>
                     <div id="error-log">{error}</div>
                 </div>
-                <div>
+                <div id="question-table-container">
                     <table id="question-table">
                         <tbody>
                             <tr>
@@ -107,12 +113,12 @@ function BuilderPage() {
                         </tbody>
                     </table>
                 </div>
-            </div>
-            <div
-                className="custom-button submit-button"
-                onClick={() => handleSubmit()}
-            >
-                SUBMIT
+                <div
+                    className="custom-button submit-button"
+                    onClick={() => handleSubmit()}
+                >
+                    SUBMIT
+                </div>
             </div>
         </div>
     );
